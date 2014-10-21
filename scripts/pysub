@@ -9,22 +9,17 @@
 ##
 
 # installed directory
-INSTALL_DIR='/usr/local/pysub'
+INSTALL_DIR='/usr/local/PySub'
 
 help_pysub()
 {
   echo "Usage: $0"
   echo "  -h : Displays this help"
+  echo "  [download] [filename/directory] : Download the subtitle/subtitles"
   exit 1
 }
 
-# If no command-line args, display help and exit
-if [ $# -lt 1 ]; then
-  help_pysub
-fi
-
-# If more than one command line argument, display help and exit
-if [ $# -gt 3 ]; then
+if [ $# -ne 2 ]; then
   help_pysub
 fi
 
@@ -36,3 +31,11 @@ do
       \?) help_pysub;;
   esac
 done
+
+if [ $# -eq 2 ]; then
+  if [ "$1" = "download" ]; then
+    python2.7 "$INSTALL_DIR/download.py" "$2" 
+  else
+    help_pysub
+  fi
+fi

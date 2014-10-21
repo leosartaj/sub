@@ -68,7 +68,8 @@ def download_file(fName, dire=pDir()):
         return r.status_code
 
     # save file
-    fName += '.srt'
+    fName, fExt = os.path.splitext(fName)
+    fName += '.srt' # replace extension with srt
     fName = os.path.join(dire, fName) # name coupled with path
     with open(fName, 'wb') as f:
         f.write(r.text.encode('ascii', 'ignore'))
@@ -79,6 +80,7 @@ def file_downloaded(fName):
     """
     print for downloaded file
     """
+    fName, fExt = os.path.splitext(fName)
     print 'Downloaded ' + fName + '.srt'
 
 def file_failed_download(status, fName):
@@ -109,9 +111,6 @@ def download(name):
         for filename in os.listdir(name):
             dwn = download(os.path.join(name, filename))
             if dwn == 1:
-                #file_downloaded(filename)
                 downloaded += 1
-            #else:
-                #file_failed_download(dwn, filename)
 
     return downloaded

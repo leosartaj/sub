@@ -107,11 +107,11 @@ def download(name):
 
     elif dirExists(name):
         for filename in os.listdir(name):
-            dwn = download_file(filename, name)
-            if dwn == 200:
-                file_downloaded(filename)
+            dwn = download(os.path.join(name, filename))
+            if dwn == 1:
+                #file_downloaded(filename)
                 downloaded += 1
-            else:
-                file_failed_download(dwn, filename)
+            #else:
+                #file_failed_download(dwn, filename)
 
     return downloaded

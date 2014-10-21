@@ -67,7 +67,6 @@ def download_file(fName, dire=pDir()):
         f.write(r.text.encode('ascii', 'ignore'))
 
     return r.status_code
-#print download_file('blacklists02e05.mp4', '/home/leosartaj/Downloads')
 
 def file_downloaded(fName):
     """
@@ -92,5 +91,3 @@ def download(dire=pDir(), fName=None):
             downloaded += 1
 
     return downloaded
-#print download('/home/leosartaj/Downloads/tbbts08e04')
-#print download('/home/leosartaj/Downloads', 'blacklists02e05.mp4')

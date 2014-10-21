@@ -12,7 +12,10 @@ from api import download
 import sys
 
 def main():
-    download(sys.argv[1])
+    try:
+        download(sys.argv[1])
+    except KeyboardInterrupt:
+        return
 
 if __name__ == '__main__':
     main()

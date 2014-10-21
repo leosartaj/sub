@@ -50,7 +50,6 @@ def get_hash(fName, readSize, dire=pDir()):
         f.seek(-readSize, os.SEEK_END)
         data += f.read(readSize)
     return md5(data).hexdigest() # return md5 hash
-#print get_hash('blacklists02e05.mp4', 64, '/home/leosartaj/Downloads/')
 
 def download_file(fName, dire=pDir()):
     """

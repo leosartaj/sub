@@ -26,6 +26,14 @@ def fileExists(fName, dire=pDir()):
         return True
     return False
 
+def dirExists(dire):
+    """
+    Check if a directory exists
+    """
+    if os.path.isdir(dire):
+        return True
+    return False
+
 def get_hash(fName, readSize, dire=pDir()):
     """
     creates the required hash
@@ -70,24 +78,41 @@ def download_file(fName, dire=pDir()):
 
 def file_downloaded(fName):
     """
-    print the name of file 
+    print for downloaded file
     """
     print 'Downloaded ' + fName + '.srt'
 
-def download(dire=pDir(), fName=None):
+def file_failed_download(status, fName):
+    """
+    print if download fails
+    """
+    if status != -1:
+        print 'Tried downloading got ' + str(status) + ' for ' + fName
+
+def download(name):
     """
     download a file or all files in a directory
     """
     downloaded = 0
 
-    if fName == None:
-        for filename in os.listdir(dire):
-            if download_file(filename, dire) == 200:
-                file_downloaded(filename)
-                downloaded += 1
-    else:
-        if download_file(fName, dire) == 200:
+    dire = os.path.dirname(name) # returns the directory name
+    fName = os.path.basename(name) # returns the filename
+
+    if fileExists(fName, dire):
+        dwn = download_file(fName, dire)
+        if dwn == 200:
             file_downloaded(fName)
             downloaded += 1
+        else:
+            file_failed_download(dwn, fName)
+
+    elif dirExists(name):
+        for filename in os.listdir(name):
+            dwn = download_file(filename, name)
+            if dwn == 200:
+                file_downloaded(filename)
+                downloaded += 1
+            else:
+                file_failed_download(dwn, filename)
 
     return downloaded

@@ -30,13 +30,11 @@ then
     exit 1
 fi
 
-# Path to install
-path=/usr/local/PySub
+path=/usr/bin/pysub
 
-if [ -d "$path" ]
+if [ -f "$path" ]
 then
-    rm -rf "$path"
-    rm -f /usr/bin/pysub
+    rm -f "$path"
 else
     echo 'PySub is not installed yet. Use install.sh to install.'
 fi

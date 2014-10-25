@@ -10,7 +10,36 @@
 
 from hashlib import md5
 import requests 
-import os
+import os, optparse, sys
+
+def parse_args():
+    usage = """usage: %prog [options] [path]
+
+    Run 
+    pysub -h/--help
+    For help
+"""
+
+    parser = optparse.OptionParser(usage)
+
+    help = "For verbose output"
+    parser.add_option('--verbose', '-v', action='store_true', help=help, dest='verbose')
+
+    help = "For recursive subtitle downloading"
+    parser.add_option('--recursive', '-r',  action='store_true', help=help, dest='recursive')
+
+    options, args = parser.parse_args()
+
+    if len(args) == 0:
+        parser.error('Not enough arguments')
+
+    dwn_this = []
+    for arg in args:
+        if not os.path.exists(arg):
+            parser.error('No such file/dir: %s' % arg)
+        dwn_this.append(arg)
+
+    return options, dwn_this
 
 def pDir():
     """
@@ -76,40 +105,38 @@ def download_file(fName, dire=pDir()):
 
     return r.status_code
 
-def file_downloaded(fName):
+def file_downloaded(dwn, fName, verbose=False):
     """
     print for downloaded file
     """
-    fName, fExt = os.path.splitext(fName)
-    print 'Downloaded ' + fName + '.srt'
+    if verbose:
+        if dwn == 200:
+            fName, fExt = os.path.splitext(fName)
+            print 'Downloaded ' + fName + '.srt'
+        elif dwn != -1:
+            print 'Tried downloading got ' + str(dwn) + ' for ' + fName
 
-def file_failed_download(status, fName):
-    """
-    print if download fails
-    """
-    if status != -1:
-        print 'Tried downloading got ' + str(status) + ' for ' + fName
-
-def download(name):
+def download(name, options):
     """
     download a file or all files in a directory
     """
-    downloaded = 0
-
     dire = os.path.dirname(name) # returns the directory name
     fName = os.path.basename(name) # returns the filename
 
     if fileExists(fName, dire):
-        dwn = download_file(fName, dire)
-        if dwn == 200:
-            file_downloaded(fName)
-            downloaded += 1
-        else:
-            file_failed_download(dwn, fName)
+        file_downloaded(download_file(fName, dire), fName, options.verbose)
     elif dirExists(name):
         for filename in os.listdir(name):
-            dwn = download(os.path.join(name, filename))
-            if dwn == 1:
-                downloaded += 1
+            if options.recursive:
+                download(os.path.join(name, filename), options)
+            else:
+                file_downloaded(download_file(fName, dire), fName, options.verbose)
 
-    return downloaded
+
+if __name__ == '__main__':
+    try:
+        options, dwn_this = parse_args()
+        for this in dwn_this:
+            download(this, options)
+    except KeyboardInterrupt:
+        sys.exit()

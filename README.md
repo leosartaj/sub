@@ -42,6 +42,8 @@ PySub uses the requests module
 Run the following command to download subtitles for a file or all the files including a directory
 
 ```
-pysub download [path]
+pysub [path] [options]
 
 ```
+
+* Run pygp -h/--help for various options

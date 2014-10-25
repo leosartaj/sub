@@ -30,13 +30,5 @@ then
     exit 1
 fi
 
-INSTALL_DIR=/usr/local/PySub
-
-if [ ! -d $INSTALL_DIR ]
-then
-    mkdir $INSTALL_DIR           # Make directory if directory does not exist
-fi
-
 # Install files
-install -m 0755 "$SCRIPT_DIR/scripts/pysub" "/usr/bin/" # Copy the PySub script
-install -m 0755 "$SCRIPT_DIR"/src/*.py "$INSTALL_DIR"
+install -m 0755 "$SCRIPT_DIR"/src/pysub.py /usr/bin/pysub

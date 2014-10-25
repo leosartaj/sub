@@ -130,7 +130,7 @@ def download(name, options):
             if options.recursive:
                 download(os.path.join(name, filename), options)
             else:
-                file_downloaded(download_file(fName, dire), fName, options.verbose)
+                file_downloaded(download_file(filename, name), filename, options.verbose)
 
 
 if __name__ == '__main__':

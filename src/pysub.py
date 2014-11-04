@@ -122,8 +122,9 @@ def download(name, options):
     """
     dire = os.path.dirname(name) # returns the directory name
     fName = os.path.basename(name) # returns the filename
+    fNameOnly, fExt = os.path.splitext(fName)
 
-    if fileExists(fName, dire):
+    if fileExists(fName, dire) and not fileExists((fNameOnly + '.srt'), dire): # skip if already downloaded
         file_downloaded(download_file(fName, dire), fName, options.verbose)
     elif dirExists(name):
         for filename in os.listdir(name):

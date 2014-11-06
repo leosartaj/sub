@@ -1,0 +1,25 @@
+#!/usr/bin/env python2
+
+##
+# PySub
+# https://github.com/leosartaj/PySub.git
+#
+# Copyright (c) 2014 Sartaj Singh
+# Licensed under the MIT license.
+##
+
+"""
+Script for using PySub
+"""
+
+import sys
+from PySub.pysub import download
+from PySub.pysub import parse_args
+
+if __name__ == '__main__':
+    try:
+        options, dwn_this = parse_args()
+        for this in dwn_this:
+            download(this, options)
+    except KeyboardInterrupt:
+        sys.exit()

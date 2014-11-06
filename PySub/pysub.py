@@ -10,7 +10,7 @@
 
 from hashlib import md5
 import requests 
-import os, optparse, sys
+import os, optparse
 
 def parse_args():
     usage = """usage: %prog [options] [path]
@@ -139,12 +139,3 @@ def download(name, options):
                 if file_downloaded(download_file(filename, name), filename, options.verbose):
                     dwn += 1
     return dwn
-
-
-if __name__ == '__main__':
-    try:
-        options, dwn_this = parse_args()
-        for this in dwn_this:
-            download(this, options)
-    except KeyboardInterrupt:
-        sys.exit()

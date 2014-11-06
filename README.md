@@ -2,33 +2,23 @@
 
 Command line tool for downloading subtitles
 
-## Getting Started
-
-Run the following commands to get a copy. 
-
-```
-# clone the repo
-git clone https://github.com/leosartaj/PySub.git
-
-```
-
 ## Installation
 
-Run the install script to install PySub
+PySub can be installed using pip
+Just run
 
 ```
-# Installation script
-./install.sh
+pip install setup.py
 
 ```
 
 ## Uninstalling
 
-Run the uninstall script to uninstall PySub
+PySub can be installed using pip
+Just run
 
 ```
-# Uninstalls PySub
-./uninstall.sh
+pip uninstall PySub
 
 ```
 
@@ -46,4 +36,4 @@ pysub [path] [options]
 
 ```
 
-* Run pygp -h/--help for various options
+* Run pysub -h/--help for various options

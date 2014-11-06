@@ -1,15 +1,15 @@
 #!/usr/bin/env python2
 
 ##
-# PySub
-# https://github.com/leosartaj/PySub.git
+# sub
+# https://github.com/leosartaj/sub.git
 #
 # Copyright (c) 2014 Sartaj Singh
 # Licensed under the MIT license.
 ##
 
 import unittest
-from PySub.PySub.pysub import get_hash
+from sub.sub.sub import get_hash
 import os
 
 class TestGetHash(unittest.TestCase):

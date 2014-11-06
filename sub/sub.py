@@ -1,8 +1,8 @@
 #!/usr/bin/env python2
 
 ##
-# PySub
-# https://github.com/leosartaj/PySub.git
+# sub
+# https://github.com/leosartaj/sub.git
 #
 # Copyright (c) 2014 Sartaj Singh
 # Licensed under the MIT license.
@@ -16,7 +16,7 @@ def parse_args():
     usage = """usage: %prog [options] [path]
 
     Run 
-    pysub -h/--help
+    sub -h/--help
     For help
 """
 
@@ -90,7 +90,7 @@ def download_file(fName, dire=pDir()):
         return -1
 
     # making request
-    user_agent = {'User-agent': 'SubDB/1.0 (PySub/0.1; http://github.com/leosartaj/PySub)'}
+    user_agent = {'User-agent': 'SubDB/1.0 (sub/0.1; http://github.com/leosartaj/sub)'}
     param = {'action': 'download', 'hash': gen_hash, 'language': 'en'} # Specification for the request
     r = requests.get("http://api.thesubdb.com/", headers = user_agent, params = param) # Get Request
     if r.status_code != 200:

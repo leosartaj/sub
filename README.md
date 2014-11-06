@@ -5,27 +5,20 @@ Command line tool for downloading subtitles
 ## Installation
 
 sub can be installed using pip
-Just run
 
 ```
-pip install setup.py
+pip install sub
 
 ```
 
 ## Uninstalling
 
 sub can be installed using pip
-Just run
 
 ```
 pip uninstall sub
 
 ```
-
-## Dependencies
-
-sub is based on Python 2.7
-sub uses the requests module
 
 ## Documentation
 
@@ -36,4 +29,4 @@ sub [path] [options]
 
 ```
 
-* Run sub -h/--help for various options
+* Run sub -h /--help for various options

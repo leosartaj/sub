@@ -9,6 +9,7 @@ Regarding code style like indentation(4 spaces) and whitespace, **follow the con
 1. Fork and clone the repo.
 2. Create a new branch, please don't work in your `master` branch directly.
 3. Implement a feature.
-4. Run to check if things work. Repeat step 3-4. Until things get working.
-5. Update the documentation to reflect any changes.
-6. Push to your fork and submit a pull request.
+4. Try to add a test for the feature.
+5. Run tests using pytest. Repeat step 3-5. Until things get working.
+6. Update the documentation to reflect any changes.
+7. Push to your fork and submit a pull request.

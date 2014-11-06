@@ -113,8 +113,10 @@ def file_downloaded(dwn, fName, verbose=False):
         if dwn == 200:
             fName, fExt = os.path.splitext(fName)
             print 'Downloaded ' + fName + '.srt'
+            return True
         elif dwn != -1:
             print 'Tried downloading got ' + str(dwn) + ' for ' + fName
+            return False
 
 def download(name, options):
     """
@@ -124,14 +126,19 @@ def download(name, options):
     fName = os.path.basename(name) # returns the filename
     fNameOnly, fExt = os.path.splitext(fName)
 
+    dwn = 0
+
     if fileExists(fName, dire) and not fileExists((fNameOnly + '.srt'), dire): # skip if already downloaded
-        file_downloaded(download_file(fName, dire), fName, options.verbose)
+        if file_downloaded(download_file(fName, dire), fName, options.verbose):
+            dwn += 1
     elif dirExists(name):
         for filename in os.listdir(name):
             if options.recursive:
-                download(os.path.join(name, filename), options)
+                dwn += download(os.path.join(name, filename), options)
             else:
-                file_downloaded(download_file(filename, name), filename, options.verbose)
+                if file_downloaded(download_file(filename, name), filename, options.verbose):
+                    dwn += 1
+    return dwn
 
 
 if __name__ == '__main__':

@@ -12,4 +12,4 @@
 SCRIPT_DIR=$(readlink -f ${0%/*})
 
 # Install files
-install -m 0755 "$SCRIPT_DIR"/src/pysub.py /usr/bin/pysub
+install -m 0755 "$SCRIPT_DIR"/PySub/pysub.py /usr/bin/pysub

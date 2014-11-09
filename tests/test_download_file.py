@@ -9,7 +9,7 @@
 ##
 
 import unittest
-from sub.sub.sub import download_file
+from sub.sub import download_file
 import os
 
 class TestDownloadFile(unittest.TestCase):

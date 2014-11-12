@@ -10,7 +10,7 @@ def readFile(fName):
 
 setup(
     name = 'sub',
-    version = '0.0.4',
+    version = '0.0.6',
     author = 'Sartaj Singh',
     author_email = 'singhsartaj94@gmail.com',
     description = ('Simple Tool to download Subtitles.'),
@@ -20,6 +20,7 @@ setup(
     url = 'http://github.com/leosartaj/sub',
     packages=['sub'],
     scripts=['bin/sub'],
+    install_requires = ['requests'],
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Topic :: Utilities',

@@ -13,7 +13,7 @@ pip install sub
 
 ## Uninstalling
 
-sub can be installed using pip
+sub can be uninstalled using pip
 
 ```
 pip uninstall sub

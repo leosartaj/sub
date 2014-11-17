@@ -9,7 +9,7 @@
 ##
 
 import unittest
-from sub.sub import get_hash
+from sub.main import get_hash
 import os
 
 class TestGetHash(unittest.TestCase):

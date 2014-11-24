@@ -10,7 +10,7 @@ def readFile(fName):
 
 setup(
     name = 'sub',
-    version = '0.0.7',
+    version = '0.0.9',
     author = 'Sartaj Singh',
     author_email = 'singhsartaj94@gmail.com',
     description = ('Simple Tool to download Subtitles.'),

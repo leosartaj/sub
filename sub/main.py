@@ -10,7 +10,7 @@
 
 from hashlib import md5
 import requests 
-import os, optparse
+import os, optparse, socket
 
 def parse_args():
     usage = """usage: %prog [options] [path]
@@ -27,6 +27,9 @@ def parse_args():
 
     help = "For recursive subtitle downloading"
     parser.add_option('--recursive', '-r',  action='store_true', help=help, dest='recursive')
+
+    help = "Set Timeout for download"
+    parser.add_option('--timeout', '-t', type='float',  help=help, default=30)
 
     options, args = parser.parse_args()
 
@@ -80,7 +83,7 @@ def get_hash(fName, readSize, dire=pDir()):
         data += f.read(readSize)
     return md5(data).hexdigest() # return md5 hash
 
-def download_file(fName, dire=pDir()):
+def download_file(fName, time, dire=pDir()):
     """
     download the required subtitle
     """
@@ -92,7 +95,10 @@ def download_file(fName, dire=pDir()):
     # making request
     user_agent = {'User-agent': 'SubDB/1.0 (sub/0.1; http://github.com/leosartaj/sub)'}
     param = {'action': 'download', 'hash': gen_hash, 'language': 'en'} # Specification for the request
-    r = requests.get("http://api.thesubdb.com/", headers = user_agent, params = param) # Get Request
+    try:
+        r = requests.get("http://api.thesubdb.com/", headers = user_agent, params = param, timeout=time) # Get Request
+    except (requests.exceptions.Timeout, socket.error):
+        return 'Timeout Error'
     if r.status_code != 200:
         return r.status_code
 
@@ -129,13 +135,13 @@ def download(name, options):
     dwn = 0
 
     if fileExists(fName, dire) and not fileExists((fNameOnly + '.srt'), dire): # skip if already downloaded
-        if file_downloaded(download_file(fName, dire), fName, options.verbose):
+        if file_downloaded(download_file(fName, options.timeout, dire), fName, options.verbose):
             dwn += 1
     elif dirExists(name):
         for filename in os.listdir(name):
             if options.recursive:
                 dwn += download(os.path.join(name, filename), options)
             else:
-                if file_downloaded(download_file(filename, name), filename, options.verbose):
+                if file_downloaded(download_file(filename, options.timeout, name), filename, options.verbose):
                     dwn += 1
     return dwn

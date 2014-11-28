@@ -12,6 +12,11 @@ from hashlib import md5
 import requests 
 import os, optparse, socket
 
+try:
+    from sub import __desc__ # try for version number
+except ImportError:
+    __desc__ = 'UNKNOWN'
+
 def parse_args():
     usage = """usage: %prog [options] [path]
 
@@ -20,7 +25,7 @@ def parse_args():
     For help
 """
 
-    parser = optparse.OptionParser(usage)
+    parser = optparse.OptionParser(usage, version=__desc__)
 
     help = "For verbose output"
     parser.add_option('--verbose', '-v', action='store_true', help=help, dest='verbose')

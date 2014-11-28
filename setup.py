@@ -3,6 +3,8 @@ try:
 except ImportError:
     from distutils.core import setup
 
+from sub import __version__ # version number
+
 def readFile(fName):
     with open(fName) as f:
         lines = f.read()
@@ -10,7 +12,7 @@ def readFile(fName):
 
 setup(
     name = 'sub',
-    version = '0.0.9',
+    version = __version__,
     author = 'Sartaj Singh',
     author_email = 'singhsartaj94@gmail.com',
     description = ('Simple Tool to download Subtitles.'),
@@ -18,7 +20,7 @@ setup(
     license = 'MIT',
     keywords = 'subtitles download movies tv shows',
     url = 'http://github.com/leosartaj/sub',
-    packages=['sub'],
+    packages=['sub', 'sub/info'],
     scripts=['bin/sub'],
     install_requires = ['requests'],
     classifiers=[

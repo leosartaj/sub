@@ -23,6 +23,7 @@ class TestDownloadFile(unittest.TestCase):
         self.smallFile = 'smallFile.testFile'
         self.largeFile = 'largeFile.testFile'
         self.noSuchFile = '$!$!$'
+        self.time = 30
 
         with open(self.smallFile, 'w') as f:
             f.write('Just Testing 1\n')
@@ -33,10 +34,10 @@ class TestDownloadFile(unittest.TestCase):
                 f.write(str(cou))
 
     def test_file_not_exists(self):
-        self.assertEqual(download_file(self.noSuchFile), -1) 
+        self.assertEqual(download_file(self.noSuchFile, self.time), -1) 
 
     def test_fileSmall(self):
-        self.assertEqual(download_file(self.smallFile), -1)
+        self.assertEqual(download_file(self.smallFile, self.time), -1)
 
     def test_largeFile(self):
         """
@@ -45,7 +46,7 @@ class TestDownloadFile(unittest.TestCase):
         because that will be heavy
         Nobody downloads such heavy code for such a small script
         """
-        self.assertEqual(download_file(self.largeFile), 404) # if all goes well file will not be found
+        self.assertEqual(download_file(self.largeFile, self.time), 404) # if all goes well file will not be found
 
     def tearDown(self):
         os.remove(self.smallFile)

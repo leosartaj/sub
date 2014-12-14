@@ -16,7 +16,7 @@ setup(
     author = 'Sartaj Singh',
     author_email = 'singhsartaj94@gmail.com',
     description = ('Simple Tool to download Subtitles.'),
-    long_description = readFile('README.md'),
+    long_description = open('README.rst').read(),
     license = 'MIT',
     keywords = 'subtitles download movies tv shows',
     url = 'http://github.com/leosartaj/sub',

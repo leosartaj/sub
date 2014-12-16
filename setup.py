@@ -1,7 +1,7 @@
 try:
-    from setuptools import setup
+    from setuptools import setup, find_packages
 except ImportError:
-    from distutils.core import setup
+    from distutils.core import setup, find_packages
 
 from sub import __version__ # version number
 
@@ -20,7 +20,7 @@ setup(
     license = 'MIT',
     keywords = 'subtitles download movies tv shows',
     url = 'http://github.com/leosartaj/sub',
-    packages=['sub', 'sub/info'],
+    packages=find_packages(),
     scripts=['bin/sub'],
     install_requires = ['requests'],
     classifiers=[

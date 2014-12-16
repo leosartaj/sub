@@ -9,7 +9,8 @@
 ##
 
 """
-Defines Version Variable
+Information Module
 """
-
 __version__ = '0.0.9'
+__desc__ = 'Sub ' + __version__
+
